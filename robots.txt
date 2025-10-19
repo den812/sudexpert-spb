@@ -1,0 +1,123 @@
+User-agent: *
+Allow: /
+
+# Исключаем служебные файлы
+Disallow: /*.txt$
+Disallow: /*.log$
+Disallow: /tmp/
+Disallow: /cache/
+
+# Приоритетные страницы для индексации
+# Экспертиза украшений, таможенная оценка, атрибуция брендов
+# Права потребителей, ФЗ №73
+
+# ============================================
+# ЯНДЕКС AI (YandexGPT, Alice, YaLM)
+# ============================================
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexGPT
+Allow: /
+
+User-agent: Alice
+Allow: /
+
+User-agent: YaLM
+Allow: /
+
+User-agent: YandexImages
+Allow: /
+
+User-agent: YandexVideo
+Allow: /
+
+User-agent: YandexMedia
+Allow: /
+
+User-agent: YandexBlogs
+Allow: /
+
+User-agent: YandexNews
+Allow: /
+
+# ============================================
+# GOOGLE AI-БОТЫ (Bard, Gemini, PaLM)
+# ============================================
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bard
+Allow: /
+
+User-agent: Gemini
+Allow: /
+
+# ============================================
+# ДРУГИЕ AI-БОТЫ
+# ============================================
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: BingPreview
+Allow: /
+
+# ============================================
+# ДОПОЛНИТЕЛЬНЫЕ AI АГЕНТЫ 2025
+# ============================================
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+# Карта сайта
+Sitemap: https://sudexpert-spb.ru/sitemap.xml
+
+# Основные директивы для поисковых систем
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+Host: https://sudexpert-spb.ru
+
+# Обновлено: 13 октября 2025
+# Полная поддержка Яндекс AI (YandexGPT, Alice, YaLM)
+# Полная поддержка всех AI-агентов нового поколения
+# Ключевые разделы: экспертиза ювелирных изделий, таможенная оценка, атрибуция брендов, права потребителей
