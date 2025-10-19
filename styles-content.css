@@ -1,6 +1,7 @@
 /* ========================================
    STYLES-CONTENT.CSS
    Services, Testimonials, Consumer Rights, Statistics, Process
+   + ДОБАВЛЕНЫ СТИЛИ ДЛЯ СТРАХОВОГО ПОЛИСА
    ======================================== */
 
 /* ========================================
@@ -383,17 +384,21 @@
     color: var(--pearl-white);
 }
 
-.guarantee-banner {
+/* ========================================
+   🆕 GUARANTEE BANNER WITH INSURANCE
+   ГИБРИД ВАРИАНТ 3 - Гарантийный баннер с полисом
+   ======================================== */
+
+.guarantee-banner-with-insurance {
     background: var(--primary-black);
     color: var(--pearl-white);
-    padding: 2rem;
-    text-align: center;
+    padding: 3rem 2rem;
     margin-top: 3rem;
     position: relative;
     overflow: hidden;
 }
 
-.guarantee-banner::before {
+.guarantee-banner-with-insurance::before {
     content: '';
     position: absolute;
     top: 0;
@@ -409,17 +414,139 @@
     100% { left: 100%; }
 }
 
-.guarantee-banner h3 {
-    font-size: 1.8rem;
+.guarantee-content-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.guarantee-text h3 {
+    font-size: 2rem;
     margin-bottom: 1rem;
     color: var(--gold);
     font-family: 'Playfair Display', serif;
     position: relative;
 }
 
-.guarantee-banner p {
-    font-size: 1.1rem;
+.guarantee-main-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.guarantee-insurance-details {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.insurance-amount {
+    color: var(--gold);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.view-insurance-btn {
+    margin-top: 1.5rem;
+    background: var(--gold);
+    color: var(--primary-black);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.view-insurance-btn:hover {
+    background: var(--pearl-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+}
+
+.insurance-preview {
+    cursor: pointer;
     position: relative;
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+}
+
+.insurance-preview:hover {
+    transform: scale(1.05);
+}
+
+.insurance-document-img {
+    width: 300px;
+    height: auto;
+    border: 3px solid var(--gold);
+    display: block;
+}
+
+.insurance-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--gold);
+    color: var(--primary-black);
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ========================================
+   🆕 DOCUMENT ITEM FEATURED
+   ВАРИАНТ 1 - Выделение страхового полиса в галерее
+   ======================================== */
+
+.document-item-featured {
+    position: relative;
+    animation: pulse-gold 3s ease-in-out infinite;
+}
+
+.document-item-featured::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, var(--gold), var(--rose-gold), var(--gold));
+    border-radius: 4px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.document-item-featured:hover::before {
+    opacity: 0.8;
+}
+
+.document-item-featured img {
+    border: 2px solid var(--gold);
+}
+
+.document-item-featured .document-caption {
+    background: linear-gradient(135deg, var(--primary-black), var(--charcoal));
+    padding: 0.8rem 1rem;
+    margin-top: 0.5rem;
+    transform: translateY(0);
+}
+
+@keyframes pulse-gold {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+    }
 }
 
 /* ========================================
@@ -551,4 +678,59 @@
 .timeline-content p {
     color: var(--text-muted);
     line-height: 1.8;
+}
+
+/* ========================================
+   🆕 RESPONSIVE FOR INSURANCE ELEMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Гарантийный баннер с полисом */
+    .guarantee-content-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+    
+    .insurance-preview {
+        margin: 2rem auto 0;
+    }
+    
+    .insurance-document-img {
+        width: 100% !important;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .guarantee-text h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .view-insurance-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Документы в галерее */
+    .document-item-featured .document-caption {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .guarantee-banner-with-insurance {
+        padding: 2rem 1rem !important;
+    }
+    
+    .guarantee-text h3 {
+        font-size: 1.3rem !important;
+    }
+    
+    .guarantee-main-text {
+        font-size: 0.95rem !important;
+    }
+    
+    .guarantee-insurance-details {
+        font-size: 0.9rem !important;
+    }
 }

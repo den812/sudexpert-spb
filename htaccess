@@ -1,0 +1,233 @@
+# ============================================
+# ULTRA OPTIMIZED .htaccess
+# Core Web Vitals Focused
+# Date: October 20, 2025 - FIXED styles.css references
+# ============================================
+
+# UTF-8 кодировка
+AddDefaultCharset UTF-8
+
+# Отключить показ списка файлов
+Options -Indexes
+
+# Главная страница
+DirectoryIndex index.html index.htm
+
+# ====================================
+# УМНЫЙ HTTPS РЕДИРЕКТ (для прокси/CloudFlare)
+# ====================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Проверка для прокси/CloudFlare
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    # ИЛИ обычная проверка HTTPS
+    RewriteCond %{HTTPS} off
+    # Применяем редирект только если оба условия выше НЕ выполнены
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ====================================
+# ЗАГОЛОВКИ БЕЗОПАСНОСТИ
+# ====================================
+<IfModule mod_headers.c>
+    # Базовые заголовки безопасности
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # HSTS - принудительный HTTPS
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    
+    # Permissions-Policy - контроль доступа к API браузера
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ====================================
+# BROTLI COMPRESSION
+# ====================================
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/plain
+    AddOutputFilterByType BROTLI_COMPRESS text/css
+    AddOutputFilterByType BROTLI_COMPRESS text/html
+    AddOutputFilterByType BROTLI_COMPRESS text/javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/x-javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/json
+    AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+</IfModule>
+
+# ====================================
+# GZIP FALLBACK COMPRESSION
+# ====================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ====================================
+# EXPIRES HEADERS - КЭШИРОВАНИЕ
+# ====================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # HTML - проверять каждый час
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # CSS и JavaScript - 1 месяц
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    
+    # Изображения - 1 год
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Шрифты - 1 год
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+</IfModule>
+
+# ====================================
+# CACHE-CONTROL HEADERS (ИСПРАВЛЕНО)
+# ====================================
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    
+    <FilesMatch "\.(jpg|jpeg|png|gif|svg|webp|ico)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+    
+    <FilesMatch "\.(woff|woff2|ttf|otf)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+    
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "public, max-age=3600"
+    </FilesMatch>
+</IfModule>
+
+# ====================================
+# MIME TYPES ДЛЯ СОВРЕМЕННЫХ ФОРМАТОВ
+# ====================================
+AddType image/webp .webp
+AddType font/woff2 .woff2
+
+# ====================================
+# ЗАЩИТА КОНФИДЕНЦИАЛЬНЫХ ФАЙЛОВ
+# ====================================
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(bak|config|sql|log|sh|inc|swp)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ====================================
+# OPTIMIZATION FOR CORE WEB VITALS
+# 🆕 ИСПРАВЛЕНО: правильные имена CSS файлов
+# ====================================
+<IfModule mod_headers.c>
+    # Preconnect для внешних ресурсов
+    <FilesMatch "\.html$">
+        Header add Link "</styles-base.css>; rel=preload; as=style"
+        Header append Link "</styles-content.css>; rel=preload; as=style"
+        Header append Link "</styles-adaptive.css>; rel=preload; as=style"
+        Header append Link "<https://fonts.googleapis.com>; rel=preconnect"
+        Header append Link "<https://fonts.gstatic.com>; rel=preconnect; crossorigin"
+    </FilesMatch>
+</IfModule>
+
+# ====================================
+# ERROR PAGES
+# ====================================
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# ====================================
+# ETag OPTIMIZATION
+# ====================================
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+# ====================================
+# ULTRA PERFORMANCE HEADERS
+# 🆕 ИСПРАВЛЕНО: правильные имена CSS файлов
+# ====================================
+<IfModule mod_headers.c>
+    # Critical Resource Hints
+    <FilesMatch "\.html$">
+        Header add Link "</styles-base.css>; rel=preload; as=style"
+        Header add Link "</styles-content.css>; rel=preload; as=style"
+        Header add Link "</styles-adaptive.css>; rel=preload; as=style"
+        Header add Link "</images/logo.jpg>; rel=preload; as=image; fetchpriority=high"
+        Header add Link "<https://fonts.googleapis.com>; rel=preconnect"
+        Header add Link "<https://fonts.gstatic.com>; rel=preconnect; crossorigin"
+    </FilesMatch>
+    
+    # LCP Optimization
+    <FilesMatch "logo\.jpg$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Timing-Allow-Origin "*"
+    </FilesMatch>
+    
+    # CLS Prevention
+    Header always set Content-Security-Policy "script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;"
+</IfModule>
+
+# ====================================
+# BROTLI ULTRA COMPRESSION
+# ====================================
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/plain
+    AddOutputFilterByType BROTLI_COMPRESS text/css
+    AddOutputFilterByType BROTLI_COMPRESS text/html
+    AddOutputFilterByType BROTLI_COMPRESS text/javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/x-javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/json
+    AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+    AddOutputFilterByType BROTLI_COMPRESS font/woff2
+</IfModule>
+
+# ====================================
+# CACHE ULTRA OPTIMIZATION
+# ====================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # LCP Image - 1 year
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    
+    # CSS & JS - 1 month
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    
+    # Fonts - 1 year
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    
+    # HTML - 1 hour
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
