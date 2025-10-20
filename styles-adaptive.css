@@ -1,5 +1,5 @@
 /* ========================================
-   STYLES-ADAPTIVE.CSS
+   STYLES-ADAPTIVE.CSS V28 ОКОНЧАТЕЛЬНЫЙ
    Contact, Footer, Floating Buttons, Responsive Design
    ======================================== */
 
@@ -212,7 +212,7 @@
 }
 
 /* ========================================
-   FLOATING BUTTONS
+   FLOATING BUTTONS - ПО УМОЛЧАНИЮ ВИДНЫ
    ======================================== */
 
 .floating-buttons {
@@ -357,10 +357,10 @@
 }
 
 /* ========================================
-   RESPONSIVE DESIGN - TABLETS
+   RESPONSIVE DESIGN - ПЛАНШЕТЫ (901-1024px)
    ======================================== */
 
-@media (max-width: 1024px) {
+@media (min-width: 901px) and (max-width: 1024px) {
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -390,30 +390,159 @@
     .documents-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    /* 🔥 ПЛАНШЕТЫ: только меню, БЕЗ телефона и кнопки */
+    .mobile-phone-header {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .nav-menu {
+        display: flex !important;
+        gap: 1.8rem !important;
+    }
+
+    .nav-menu a {
+        font-size: 0.9rem !important;
+    }
+
+    /* ❌ СКРЫВАЕМ header-contact (телефон + кнопка) на планшетах */
+    .header-contact {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    /* Боковые кнопки ВИДНЫ */
+    .floating-buttons {
+        display: flex !important;
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
 }
 
 /* ========================================
-   RESPONSIVE DESIGN - MOBILE
+   RESPONSIVE DESIGN - ДЕСКТОП (от 1025px)
    ======================================== */
 
-@media (max-width: 768px) {
+@media (min-width: 1025px) and (max-width: 1180px) {
+    /* 🔥 КОМПАКТНЫЙ ДЕСКТОП 1025-1180px: все элементы, но компактно */
+    .mobile-phone-header {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .nav-menu {
+        display: flex !important;
+        gap: 1.5rem !important; /* Компактный gap */
+    }
+
+    .nav-menu a {
+        font-size: 0.85rem !important; /* Меньше шрифт */
+    }
+
+    .header-contact {
+        display: flex !important;
+        visibility: visible !important;
+        gap: 0.8rem !important; /* Компактный gap */
+    }
+
+    .phone-number {
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+    }
+
+    .consultation-btn {
+        padding: 0.6rem 1.2rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    .floating-buttons {
+        display: flex !important;
+    }
+
+    .container {
+        padding: 0 1.2rem;
+    }
+
+    .header-content {
+        padding: 1.2rem 0 !important;
+    }
+}
+
+@media (min-width: 1181px) {
+    /* 🔥 ПОЛНЫЙ ДЕСКТОП от 1181px: все элементы стандартного размера */
+    .mobile-phone-header {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .nav-menu {
+        display: flex !important;
+    }
+
+    .header-contact {
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    .floating-buttons {
+        display: flex !important;
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - МОБИЛЬНЫЕ И МАЛЫЕ ПЛАНШЕТЫ (до 900px)
+   ======================================== */
+
+@media (max-width: 900px) {
     .container {
         padding: 0 1rem;
     }
     
+    /* ❌ СКРЫВАЕМ ДЕСКТОПНОЕ МЕНЮ */
     .nav-menu {
-        display: none;
+        display: none !important;
+        visibility: hidden !important;
     }
 
+    /* ❌ СКРЫВАЕМ ДЕСКТОПНЫЕ КОНТАКТЫ */
     .header-contact {
-        display: none;
+        display: none !important;
+        visibility: hidden !important;
     }
 
+    /* ✅ ПОКАЗЫВАЕМ ГАМБУРГЕР */
     .mobile-menu-toggle {
-        display: flex;
+        display: flex !important;
     }
-    
+
+    /* 🔥 ИЗМЕНЯЕМ LAYOUT HEADER - 3 КОЛОНКИ: лого | телефон | гамбургер */
+    .header-content {
+        display: grid !important;
+        grid-template-columns: auto 1fr auto !important;
+        gap: 0.5rem !important;
+        align-items: center !important;
+        padding: 1rem 0 !important;
+    }
+
+    /* Лого - слева (колонка 1) */
     .logo {
+        grid-column: 1 !important;
+        justify-self: start !important;
         gap: 0.5rem;
     }
 
@@ -422,7 +551,95 @@
     }
 
     .logo-text {
-        display: none;
+        display: none !important;
+    }
+
+    /* 🔥 ТЕЛЕФОН - ЦЕНТР (колонка 2) */
+    .mobile-phone-header {
+        display: flex !important;
+        visibility: visible !important;
+        grid-column: 2 !important;
+        justify-self: center !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        color: var(--gold) !important;
+        text-decoration: none !important;
+        font-size: 1.4rem !important;
+        font-weight: 700 !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .mobile-phone-header:hover {
+        color: var(--primary-black) !important;
+    }
+
+    .mobile-phone-header svg {
+        width: 26px !important;
+        height: 26px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Гамбургер - справа (колонка 3) */
+    .mobile-menu-toggle {
+        grid-column: 3 !important;
+        justify-self: end !important;
+        margin-left: 0 !important;
+    }
+
+    /* 🔥 СКРЫВАЕМ ВСЕ БОКОВЫЕ КНОПКИ на мобильных */
+    .floating-buttons {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* 🔥 ИСПРАВЛЕНИЕ TIMELINE для мобильных */
+    .timeline {
+        position: relative;
+        padding-left: 0 !important;
+    }
+
+    .timeline::before {
+        display: none !important; /* Убираем вертикальную линию */
+    }
+
+    .timeline-item {
+        display: flex !important;
+        flex-direction: column !important;
+        margin-bottom: 2rem !important;
+        padding: 1.5rem !important;
+        background: white !important;
+        border-radius: 8px !important;
+        position: relative !important;
+    }
+
+    .timeline-marker {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 1rem !important;
+        left: auto !important;
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    .timeline-content {
+        width: 100% !important;
+        margin: 0 !important;
+        padding-right: 60px !important; /* Место для номера */
+        text-align: left !important;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .timeline-content p {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
     }
     
     .hero-title {
@@ -431,12 +648,6 @@
 
     .hero-slogan {
         font-size: 1.1rem;
-    }
-
-    .hero::after {
-        width: 200px;
-        height: 200px;
-        opacity: 0.05;
     }
 
     .article-preview {
@@ -455,7 +666,6 @@
         font-size: 1.4rem;
     }
 
-    /* Уведомления для мобильных */
     #notificationContainer {
         top: 90px;
         right: 10px;
@@ -475,31 +685,6 @@
 
     .notification-message {
         font-size: 0.85rem;
-    }
-
-    /* Плавающие кнопки для планшетов */
-    .floating-buttons {
-        bottom: 1.5rem;
-        right: 1rem;
-        gap: 0.7rem;
-        z-index: 998;
-        max-width: 48px;
-    }
-
-    .floating-btn {
-        width: 48px;
-        height: 48px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .floating-btn svg {
-        width: 22px;
-        height: 22px;
-    }
-
-    .floating-btn::before,
-    .floating-btn::after {
-        display: none;
     }
     
     .hero-stats {
@@ -571,7 +756,6 @@
         border-radius: 50%;
     }
 
-    /* Гарантия отсутствия горизонтального скролла */
     section {
         max-width: 100%;
         overflow-x: hidden;
@@ -600,11 +784,16 @@
         font-size: 2rem;
     }
 
-    .hero::after {
-        display: none;
+    /* Меньше телефон для маленьких экранов */
+    .mobile-phone-header {
+        font-size: 1.2rem !important;
     }
 
-    /* Уведомления для маленьких экранов */
+    .mobile-phone-header svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
     #notificationContainer {
         top: 80px;
         right: 5px;
@@ -626,27 +815,6 @@
         font-size: 0.8rem;
     }
 
-    /* Компактные плавающие кнопки */
-    .floating-buttons {
-        bottom: 1rem;
-        right: 0.5rem;
-        gap: 0.6rem;
-        z-index: 998;
-        max-width: 44px;
-    }
-
-    .floating-btn {
-        width: 44px;
-        height: 44px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    .floating-btn svg {
-        width: 20px;
-        height: 20px;
-    }
-
-    /* Гарантия правильных границ */
     .container {
         padding: 0 0.75rem;
         max-width: 100%;
@@ -668,10 +836,83 @@
 }
 
 /* ========================================
-   RESPONSIVE DESIGN - EXTRA SMALL
+   RESPONSIVE DESIGN - EXTRA SMALL (≤360px)
    ======================================== */
 
 @media (max-width: 360px) {
+    /* Компактный размер телефона в header */
+    .mobile-phone-header {
+        font-size: 1.1rem !important;
+    }
+
+    .mobile-phone-header svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    /* Уменьшаем заголовки секций */
+    .section-title {
+        font-size: 1.8rem !important;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem !important;
+    }
+
+    /* Компактные карточки услуг */
+    .service-card {
+        padding: 1.2rem !important;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.6rem !important;
+    }
+
+    .service-card p {
+        font-size: 0.85rem !important;
+    }
+
+    .service-icon {
+        width: 40px !important;
+        height: 40px !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .service-icon svg {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .service-meta {
+        font-size: 0.8rem !important;
+    }
+
+    /* Компактный timeline */
+    .timeline-item {
+        padding: 1.2rem !important;
+    }
+
+    .timeline-marker {
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1rem !important;
+        top: 0.8rem !important;
+        right: 0.8rem !important;
+    }
+
+    .timeline-content {
+        padding-right: 55px !important;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .timeline-content p {
+        font-size: 0.85rem !important;
+    }
+
     /* Уведомления */
     #notificationContainer {
         top: 75px;
@@ -692,27 +933,25 @@
         font-size: 0.75rem;
     }
 
-    .floating-buttons {
-        bottom: 0.75rem;
-        right: 0.25rem;
-        gap: 0.5rem;
-        z-index: 998;
-        max-width: 40px;
-    }
-
-    .floating-btn {
-        width: 40px;
-        height: 40px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .floating-btn svg {
-        width: 18px;
-        height: 18px;
-    }
-
+    /* Компактный контейнер */
     .container {
         padding: 0 0.5rem;
+    }
+
+    /* Компактные кнопки hero */
+    .primary-btn,
+    .secondary-btn {
+        padding: 0.9rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Компактные статистики */
+    .stat-number {
+        font-size: 2rem !important;
+    }
+
+    .stat-text {
+        font-size: 0.8rem !important;
     }
 }
 

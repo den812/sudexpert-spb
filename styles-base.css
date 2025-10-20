@@ -1,5 +1,5 @@
 /* ========================================
-   STYLES-BASE.CSS
+   STYLES-BASE.CSS V25
    Базовые стили, переменные, Header, Hero, модальные окна
    ======================================== */
 
@@ -276,6 +276,29 @@ header.scrolled {
     margin-top: 1rem;
 }
 
+/* ✅ МОБИЛЬНЫЙ ТЕЛЕФОН В HEADER - СКРЫТ ПО УМОЛЧАНИЮ */
+.mobile-phone-header {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.mobile-phone-header:hover {
+    color: var(--primary-black);
+}
+
+.mobile-phone-header svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 /* ========================================
    HERO SECTION
    ======================================== */
@@ -292,42 +315,8 @@ header.scrolled {
     max-width: 100vw;
 }
 
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.05;
-    pointer-events: none;
-}
-
-.hero-pattern {
-    width: 100%;
-    height: 100%;
-    background-image: repeating-linear-gradient(
-        45deg,
-        var(--primary-black),
-        var(--primary-black) 1px,
-        transparent 1px,
-        transparent 15px
-    );
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 5%;
-    width: 400px;
-    height: 400px;
-    background: url('images/logo.jpg') no-repeat center;
-    background-size: contain;
-    opacity: 0.08;
-    transform: translateY(-50%);
-    pointer-events: none;
-    filter: sepia(100%) saturate(200%) hue-rotate(15deg) brightness(1.2);
-}
+/* ❌ УБРАН ВАТЕРМАРК ЛОГО */
+/* hero::after был удален */
 
 .hero-content {
     position: relative;
