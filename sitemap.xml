@@ -8,11 +8,11 @@
    <url>
       <loc>https://sudexpert-spb.ru/</loc>
       <lastmod>2025-10-20</lastmod>
-      <changefreq>monthly</changefreq>
+      <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
 
-   <!-- Секция: Экспертиза -->
+   <!-- Секция "Экспертиза" (Hero) -->
    <url>
       <loc>https://sudexpert-spb.ru/#expertise</loc>
       <lastmod>2025-10-20</lastmod>
@@ -20,36 +20,44 @@
       <priority>0.9</priority>
    </url>
 
-   <!-- Секция: Услуги -->
+   <!-- Секция "Услуги" -->
    <url>
       <loc>https://sudexpert-spb.ru/#services</loc>
+      <lastmod>2025-10-20</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.9</priority>
+   </url>
+
+   <!-- Секция "Отзывы" -->
+   <url>
+      <loc>https://sudexpert-spb.ru/#testimonials</loc>
       <lastmod>2025-10-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>
 
-   <!-- Секция: Отзывы -->
-   <url>
-      <loc>https://sudexpert-spb.ru/#testimonials</loc>
-      <lastmod>2025-10-20</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-   </url>
-
-   <!-- Секция: Процесс работы (ДОБАВЛЕНО V22) -->
+   <!-- Секция "Процесс экспертизы" -->
    <url>
       <loc>https://sudexpert-spb.ru/#process</loc>
       <lastmod>2025-10-20</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
+      <priority>0.8</priority>
    </url>
 
-   <!-- Секция: Контакты -->
+   <!-- Секция "Контакты" -->
    <url>
       <loc>https://sudexpert-spb.ru/#contact</loc>
       <lastmod>2025-10-20</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.9</priority>
+   </url>
+
+   <!-- Страница 404 (для полноты) -->
+   <url>
+      <loc>https://sudexpert-spb.ru/404.html</loc>
+      <lastmod>2025-10-20</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.1</priority>
    </url>
 
 </urlset>
