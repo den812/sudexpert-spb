@@ -1,7 +1,8 @@
 # ============================================
-# ULTRA OPTIMIZED .htaccess
-# Core Web Vitals Focused
-# Date: October 20, 2025 - FIXED styles.css references
+# ULTRA OPTIMIZED .htaccess V22
+# Core Web Vitals Focused + WWW Redirect
+# Date: October 20, 2025
+# Changes: Added www→non-www redirect, custom error pages
 # ============================================
 
 # UTF-8 кодировка
@@ -14,16 +15,21 @@ Options -Indexes
 DirectoryIndex index.html index.htm
 
 # ====================================
-# УМНЫЙ HTTPS РЕДИРЕКТ (для прокси/CloudFlare)
+# WWW → NON-WWW REDIRECT (NEW V22)
 # ====================================
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /
+    
+    # Редирект с www на non-www
+    RewriteCond %{HTTP_HOST} ^www\.sudexpert-spb\.ru$ [NC]
+    RewriteRule ^(.*)$ https://sudexpert-spb.ru/$1 [R=301,L]
     
     # Проверка для прокси/CloudFlare
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
     # ИЛИ обычная проверка HTTPS
     RewriteCond %{HTTPS} off
-    # Применяем редирект только если оба условия выше НЕ выполнены
+    # Редирект на HTTPS (только если не www редирект выше)
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
@@ -56,6 +62,7 @@ DirectoryIndex index.html index.htm
     AddOutputFilterByType BROTLI_COMPRESS application/x-javascript
     AddOutputFilterByType BROTLI_COMPRESS application/json
     AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+    AddOutputFilterByType BROTLI_COMPRESS font/woff2
 </IfModule>
 
 # ====================================
@@ -87,6 +94,7 @@ DirectoryIndex index.html index.htm
     
     # Изображения - 1 год
     ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
@@ -102,7 +110,7 @@ DirectoryIndex index.html index.htm
 </IfModule>
 
 # ====================================
-# CACHE-CONTROL HEADERS (ИСПРАВЛЕНО)
+# CACHE-CONTROL HEADERS
 # ====================================
 <IfModule mod_headers.c>
     <FilesMatch "\.(css|js)$">
@@ -142,8 +150,7 @@ AddType font/woff2 .woff2
 </FilesMatch>
 
 # ====================================
-# OPTIMIZATION FOR CORE WEB VITALS
-# 🆕 ИСПРАВЛЕНО: правильные имена CSS файлов
+# PRELOAD & PERFORMANCE HEADERS
 # ====================================
 <IfModule mod_headers.c>
     # Preconnect для внешних ресурсов
@@ -154,16 +161,25 @@ AddType font/woff2 .woff2
         Header append Link "<https://fonts.googleapis.com>; rel=preconnect"
         Header append Link "<https://fonts.gstatic.com>; rel=preconnect; crossorigin"
     </FilesMatch>
+    
+    # LCP Optimization для логотипа
+    <FilesMatch "logo\.jpg$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Timing-Allow-Origin "*"
+    </FilesMatch>
+    
+    # Content Security Policy
+    Header always set Content-Security-Policy "script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;"
 </IfModule>
 
 # ====================================
-# ERROR PAGES
+# ERROR PAGES (UPDATED V22)
 # ====================================
 ErrorDocument 404 /404.html
 ErrorDocument 500 /500.html
 
 # ====================================
-# ETag OPTIMIZATION
+# ETAG OPTIMIZATION
 # ====================================
 <IfModule mod_headers.c>
     Header unset ETag
@@ -171,63 +187,21 @@ ErrorDocument 500 /500.html
 FileETag None
 
 # ====================================
-# ULTRA PERFORMANCE HEADERS
-# 🆕 ИСПРАВЛЕНО: правильные имена CSS файлов
+# PERFORMANCE - PREFETCH DNS
 # ====================================
 <IfModule mod_headers.c>
-    # Critical Resource Hints
     <FilesMatch "\.html$">
-        Header add Link "</styles-base.css>; rel=preload; as=style"
-        Header add Link "</styles-content.css>; rel=preload; as=style"
-        Header add Link "</styles-adaptive.css>; rel=preload; as=style"
-        Header add Link "</images/logo.jpg>; rel=preload; as=image; fetchpriority=high"
-        Header add Link "<https://fonts.googleapis.com>; rel=preconnect"
-        Header add Link "<https://fonts.gstatic.com>; rel=preconnect; crossorigin"
+        Header add Link "<https://fonts.googleapis.com>; rel=dns-prefetch"
+        Header append Link "<https://fonts.gstatic.com>; rel=dns-prefetch"
     </FilesMatch>
-    
-    # LCP Optimization
-    <FilesMatch "logo\.jpg$">
-        Header set Cache-Control "public, max-age=31536000, immutable"
-        Header set Timing-Allow-Origin "*"
-    </FilesMatch>
-    
-    # CLS Prevention
-    Header always set Content-Security-Policy "script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;"
 </IfModule>
 
 # ====================================
-# BROTLI ULTRA COMPRESSION
+# ВЕРСИЯ И ДАТА ОБНОВЛЕНИЯ
 # ====================================
-<IfModule mod_brotli.c>
-    AddOutputFilterByType BROTLI_COMPRESS text/plain
-    AddOutputFilterByType BROTLI_COMPRESS text/css
-    AddOutputFilterByType BROTLI_COMPRESS text/html
-    AddOutputFilterByType BROTLI_COMPRESS text/javascript
-    AddOutputFilterByType BROTLI_COMPRESS application/javascript
-    AddOutputFilterByType BROTLI_COMPRESS application/x-javascript
-    AddOutputFilterByType BROTLI_COMPRESS application/json
-    AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
-    AddOutputFilterByType BROTLI_COMPRESS font/woff2
-</IfModule>
-
-# ====================================
-# CACHE ULTRA OPTIMIZATION
-# ====================================
-<IfModule mod_expires.c>
-    ExpiresActive On
-    
-    # LCP Image - 1 year
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
-    
-    # CSS & JS - 1 month
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-    
-    # Fonts - 1 year
-    ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType font/woff "access plus 1 year"
-    
-    # HTML - 1 hour
-    ExpiresByType text/html "access plus 1 hour"
-</IfModule>
+# Version: V22
+# Updated: October 20, 2025
+# Changes: 
+# - Added www → non-www redirect
+# - Updated error pages references
+# - Optimized for Core Web Vitals

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Страница не найдена | AZ ALMAZ</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fefefe 0%, #e5e5e5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            padding: 2rem;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 4rem 3rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            opacity: 0.7;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 300;
+            color: #d4af37;
+            line-height: 1;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #000000;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: #000000;
+            color: #fefefe;
+            border: 2px solid #000000;
+        }
+        
+        .btn-primary:hover {
+            background: #d4af37;
+            border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+        
+        .btn-secondary:hover {
+            background: #000000;
+            color: #fefefe;
+        }
+        
+        .error-links {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .error-links h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        .error-links a {
+            display: inline-block;
+            color: #666666;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        
+        .error-links a:hover {
+            color: #d4af37;
+        }
+        
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 3rem 2rem;
+            }
+            
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <img src="/images/logo.jpg" alt="AZ ALMAZ" class="logo">
+        
+        <div class="error-code">404</div>
+        
+        <h1 class="error-title">Страница не найдена</h1>
+        
+        <p class="error-message">
+            К сожалению, запрашиваемая страница не существует или была перемещена.<br>
+            Возможно, вы перешли по устаревшей ссылке или допустили опечатку в адресе.
+        </p>
+        
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">На главную</a>
+            <a href="/#contact" class="btn btn-secondary">Связаться с нами</a>
+        </div>
+        
+        <div class="error-links">
+            <h3>Полезные ссылки</h3>
+            <a href="/#expertise">Экспертиза</a>
+            <a href="/#services">Услуги</a>
+            <a href="/#testimonials">Отзывы</a>
+            <a href="/#process">Процесс</a>
+        </div>
+    </div>
+</body>
+</html>
