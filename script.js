@@ -10,8 +10,8 @@
 // ===================================================================
 
 const TELEGRAM_CONFIG = {
-    botToken: '8354806665:AAHzhE67cOx_hP3pbxpVnoX3xOlQat0gJng',
-    chatId: '6738077046'
+    botToken: '---',
+    chatId: '---'
 };
 
 // Проверка конфигурации при загрузке
