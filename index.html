@@ -124,7 +124,11 @@
                 </a>
     
                 <!-- Мобильное меню кнопка -->
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Меню">
+                <button class="mobile-menu-toggle" 
+                        onclick="toggleMobileMenu()" 
+                        aria-label="Открыть меню навигации"
+                        aria-expanded="false"
+                        aria-controls="mobileNav">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -133,7 +137,10 @@
         </div>
     
         <!-- Мобильная навигация -->
-        <nav class="mobile-nav" id="mobileNav">
+        <nav class="mobile-nav" 
+             id="mobileNav" 
+             role="navigation" 
+             aria-label="Мобильная навигация">
             <a href="#expertise" onclick="closeMobileMenu()">Экспертиза</a>
             <a href="#services" onclick="closeMobileMenu()">Услуги</a>
             <a href="#testimonials" onclick="closeMobileMenu()">Отзывы</a>
@@ -198,6 +205,17 @@
                 <div class="documents-gallery">
                     <h3 class="documents-title">Документы и сертификаты</h3>
                     <div class="documents-grid">
+                    <div class="document-item" onclick="openModal('images/official-letter.jpg')">
+                        <img 
+                            src="images/official-letter.jpg" 
+                            alt="Официальное письмо Судебно-экспертной палаты РФ о единственном эксперте" 
+                            width="200" 
+                            height="200" 
+                            loading="lazy" 
+                            decoding="async"
+                            fetchpriority="low">
+                        <div class="document-caption">Официальное подтверждение уникальности</div>
+                    </div>
                     <div class="document-item" onclick="openModal('images/vipiska_iz_reestra.jpg')">
                         <img 
                             src="images/vipiska_iz_reestra.jpg" 
@@ -262,17 +280,6 @@
                             fetchpriority="low">
                         <div class="document-caption">Сертификат специалиста</div>
                     </div>
-                    <div class="document-item" onclick="openModal('images/official-letter.jpg')">
-                        <img 
-                            src="images/official-letter.jpg" 
-                            alt="Официальное письмо Судебно-экспертной палаты РФ о единственном эксперте" 
-                            width="200" 
-                            height="200" 
-                            loading="lazy" 
-                            decoding="async"
-                            fetchpriority="low">
-                        <div class="document-caption">Официальное подтверждение уникальности</div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -280,12 +287,26 @@
     </section>
 
     <!-- Модальное окно -->
-    <div id="documentModal" class="modal" onclick="closeModal(event)">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal(event)">&times;</span>
-            <img id="modalImage" src="" alt="">
-        </div>
+<div id="documentModal" 
+     class="modal" 
+     onclick="closeModal(event)" 
+    role="dialog" 
+     aria-modal="true" 
+     aria-labelledby="modalImageTitle"
+     aria-hidden="true">
+    <div class="modal-content">
+        <span class="modal-close" 
+              onclick="closeModal(event)" 
+              role="button" 
+              aria-label="Закрыть модальное окно"
+              tabindex="0">&times;</span>
+        <img id="modalImage" 
+             src="" 
+             alt="" 
+             role="img"
+             aria-describedby="modalImageTitle">
     </div>
+</div>
 
     <!-- Expert Status -->
     <section class="expert-status">
@@ -571,6 +592,231 @@
         </div>
     </section>
 
+    <!-- Секция "Наши работы" -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title serif">Примеры наших работ</h2>
+                <p class="section-subtitle">Реальные кейсы экспертизы с конкретными результатами</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                
+                <!-- Кейс 1: Выявление подделки часов -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="images/case-fake-watch.jpg" 
+                             alt="Экспертиза выявила поддельные часы Cartier - китайский механизм вместо швейцарского"
+                             width="400" 
+                             height="300"
+                             loading="lazy">
+                        <div class="portfolio-badge">Подделка</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Выявление подделки Cartier Santos</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-category">Проверка брендов</span>
+                            <span class="portfolio-date">Сентябрь 2025</span>
+                        </div>
+                        <p>
+                            Клиент приобрел часы Cartier Santos через интернет-магазин за 350 000 рублей. 
+                            Экспертиза установила: китайский механизм вместо швейцарского, корпус из 
+                            нержавеющей стали вместо золота 750 пробы, гравировка выполнена лазером 
+                            (оригинал - механическая).
+                        </p>
+                        <div class="portfolio-result">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Результат: Полный возврат 350 000 рублей через суд</span>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Кейс 2: Производственный брак -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="images/case-defect-ring.jpg" 
+                             alt="Обнаружен производственный брак кольца - трещина в бриллианте при закрепке"
+                             width="400" 
+                             height="300"
+                             loading="lazy">
+                        <div class="portfolio-badge defect">Брак</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Производственный брак золотого кольца</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-category">Экспертиза дефектов</span>
+                            <span class="portfolio-date">Август 2025</span>
+                        </div>
+                        <p>
+                            После 2 месяцев носки из кольца выпал центральный бриллиант 0.5 карата. 
+                            Магазин утверждал, что это вина покупателя. Экспертиза выявила: 
+                            внутренняя трещина в камне, образовавшаяся при закрепке (избыточное давление крапанов), 
+                            некачественная полировка посадочного места.
+                        </p>
+                        <div class="portfolio-result">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Результат: Возврат 85 000 рублей + новое кольцо взамен</span>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Кейс 3: Атрибуция антиквариата -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="images/case-antique-necklace.jpg" 
+                             alt="Атрибуция антикварного колье XIX века - определено авторство Карла Фаберже"
+                             width="400" 
+                             height="300"
+                             loading="lazy">
+                        <div class="portfolio-badge antique">Антиквариат</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Атрибуция колье XIX века</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-category">Антикварная оценка</span>
+                            <span class="portfolio-date">Июль 2025</span>
+                        </div>
+                        <p>
+                            Клиентка унаследовала колье, считая его обычным украшением. Экспертиза установила: 
+                            работа мастерской Карла Фаберже, 1890-е годы, золото 56 пробы (российский стандарт), 
+                            природные александриты редкого качества. Обнаружены оригинальные клейма и 
+                            мастерское клеймо известного ювелира.
+                        </p>
+                        <div class="portfolio-result">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            <span>Результат: Стоимость выросла с 50 000 до 2 800 000 рублей</span>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Кейс 4: Синтетический камень -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="images/case-synthetic-diamond.jpg" 
+                             alt="Выявление синтетического муассанита вместо природного бриллианта"
+                             width="400" 
+                             height="300"
+                             loading="lazy">
+                        <div class="portfolio-badge synthetic">Синтетика</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Синтетический муассанит вместо бриллианта</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-category">Экспертиза подлинности</span>
+                            <span class="portfolio-date">Июнь 2025</span>
+                        </div>
+                        <p>
+                            Покупка обручального кольца с "бриллиантом" 1.5 карата за 180 000 рублей в ломбарде. 
+                            Экспертиза с использованием спектрального анализатора AVRORA DIAMOND INSPECTOR 
+                            установила: синтетический муассанит (имитация алмаза). Реальная стоимость камня - 
+                            около 3 000 рублей.
+                        </p>
+                        <div class="portfolio-result">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Результат: Отказ от покупки, экономия 180 000 рублей</span>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Кейс 5: Судебная экспертиза -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="images/case-court-expertise.jpg" 
+                             alt="Судебная экспертиза при разделе имущества - оценка коллекции украшений"
+                             width="400" 
+                             height="300"
+                             loading="lazy">
+                        <div class="portfolio-badge court">Суд</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Раздел имущества: коллекция украшений</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-category">Судебная экспертиза</span>
+                            <span class="portfolio-date">Май 2025</span>
+                        </div>
+                        <p>
+                            Супруги не могли поделить коллекцию из 24 украшений, каждый утверждал разную стоимость. 
+                            Суд назначил независимую экспертизу. Проведена детальная оценка каждого изделия 
+                            с определением пробы металла, веса, качества камней. Подготовлен официальный отчет 
+                            для суда с фотофиксацией.
+                        </p>
+                        <div class="portfolio-result">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Результат: Суд принял экспертизу без замечаний, справедливый раздел</span>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Кейс 6: Страховой случай -->
+                <article class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="images/case-insurance-claim.jpg" 
+                             alt="Страховая экспертиза после утери колье - определение стоимости для выплаты"
+                             width="400" 
+                             height="300"
+                             loading="lazy">
+                        <div class="portfolio-badge insurance">Страховая</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Страховой случай: утеря колье</h3>
+                        <div class="portfolio-meta">
+                            <span class="portfolio-category">Страховая оценка</span>
+                            <span class="portfolio-date">Апрель 2025</span>
+                        </div>
+                        <p>
+                            Клиентка застраховала колье на 500 000 рублей. После утери страховая компания 
+                            требовала независимую экспертизу для подтверждения стоимости. На основании чека, 
+                            фотографий и аналогов проведена оценка. Подтверждена заявленная стоимость, 
+                            учтены актуальные рыночные цены на золото и бриллианты.
+                        </p>
+                        <div class="portfolio-result">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Результат: СПАО ИНГОССТРАХ выплатил полную страховую сумму 500 000 рублей</span>
+                        </div>
+                    </div>
+                </article>
+    
+            </div>
+    
+            <!-- Статистика успеха -->
+            <div class="portfolio-stats">
+                <div class="portfolio-stat-item">
+                    <span class="stat-number">87 млн ₽</span>
+                    <span class="stat-label">Возвращено клиентам за 2024 год</span>
+                </div>
+                <div class="portfolio-stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Экспертиз признаны судами</span>
+                </div>
+                <div class="portfolio-stat-item">
+                    <span class="stat-number">7500+</span>
+                    <span class="stat-label">Экспертиз проведено</span>
+                </div>
+            </div>
+    
+            <!-- Призыв к действию -->
+            <div class="portfolio-cta">
+                <h3>Нужна экспертиза ювелирных изделий?</h3>
+                <p>Защитим ваши права и интересы профессионально</p>
+                <button class="primary-btn" onclick="scrollToContact()">
+                    Заказать экспертизу
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Consumer Rights с полисом -->
     <section class="consumer-rights">
         <div class="container">
@@ -633,7 +879,7 @@
                             </div>
                             <div class="key-point-text">
                                 <h4>Застрахованная экспертиза</h4>
-                                <p>Наша работа застрахована на сумму до 1 000 000 рублей</p>
+                                <p>Наша работа застрахована в СПАО ИНГОССТРАХ на сумму до 1 000 000 рублей</p>
                             </div>
                         </div>
                     </div>
@@ -868,15 +1114,44 @@
                     </div>
                 </div>
                 
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" 
+                      id="contactForm" 
+                      role="form" 
+                      aria-label="Форма заказа экспертизы">
+                    
                     <div class="form-row">
-                        <input type="text" name="name" placeholder="Ваше имя" required>
+                        <label for="nameInput" class="visually-hidden">Ваше имя</label>
+                        <input type="text" 
+                               id="nameInput" 
+                               name="name" 
+                               placeholder="Ваше имя" 
+                               required
+                               aria-required="true"
+                               aria-label="Введите ваше имя">
                     </div>
+                    
                     <div class="form-row">
-                        <input type="tel" name="phone" id="phoneInput" placeholder="Телефон" required>
+                        <label for="phoneInput" class="visually-hidden">Телефон</label>
+                        <input type="tel" 
+                               id="phoneInput" 
+                               name="phone" 
+                               placeholder="Телефон" 
+                               required
+                               aria-required="true"
+                               aria-label="Введите номер телефона"
+                               aria-describedby="phoneHelp">
+                        <span id="phoneHelp" class="visually-hidden">
+                            Формат: +7 (XXX) XXX-XX-XX
+                        </span>
                     </div>
+                    
                     <div class="form-row">
-                        <select name="service" required>
+                        <label for="serviceSelect" class="visually-hidden">Выберите услугу</label>
+                        <select id="serviceSelect" 
+                                name="service" 
+                                required
+                                aria-required="true"
+                                aria-label="Выберите тип услуги">
                             <option value="">Выберите услугу</option>
                             <option value="jewelry">Экспертиза украшений и камней</option>
                             <option value="brand">Проверка брендов на подлинность</option>
@@ -889,13 +1164,25 @@
                             <option value="antique">Антикварная оценка</option>
                         </select>
                     </div>
+                    
                     <div class="form-row">
-                        <textarea name="message" rows="4" placeholder="Опишите вашу задачу"></textarea>
+                        <label for="messageTextarea" class="visually-hidden">Сообщение</label>
+                        <textarea id="messageTextarea" 
+                                  name="message" 
+                                  rows="4" 
+                                  placeholder="Опишите вашу задачу"
+                                  aria-label="Опишите вашу задачу (необязательно)"></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">
+                    
+                    <button type="submit" 
+                            class="submit-btn"
+                            aria-label="Отправить заявку на экспертизу">
                         Отправить заявку
                     </button>
-                    <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+                    
+                    <p class="form-note" role="note">
+                        Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+                    </p>
                 </form>
             </div>
         </div>

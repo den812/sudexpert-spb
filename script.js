@@ -10,8 +10,8 @@
 // ===================================================================
 
 const TELEGRAM_CONFIG = {
-    botToken: '---',
-    chatId: '---'
+    botToken: '8354806665:AAHzhE67cOx_hP3pbxpVnoX3xOlQat0gJng',
+    chatId: '6738077046'
 };
 
 // Проверка конфигурации при загрузке
@@ -27,15 +27,17 @@ function toggleMobileMenu() {
     
     if (!nav || !toggle) return;
     
+    const isExpanded = nav.classList.contains('active');
+    
     nav.classList.toggle('active');
     toggle.classList.toggle('active');
     
-    // Блокировка скролла при открытом меню
-    if (nav.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
+    // Обновляем ARIA атрибут
+    toggle.setAttribute('aria-expanded', !isExpanded);
+    toggle.setAttribute('aria-label', !isExpanded ? 'Закрыть меню' : 'Открыть меню навигации');
+    
+    // Блокировка скролла
+    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
 }
 
 function closeMobileMenu() {
@@ -120,8 +122,21 @@ function openModal(imageSrc) {
     
     if (modal && modalImage) {
         modalImage.src = imageSrc;
+        // Используем alt изображения как заголовок
+        const sourceImg = document.querySelector(`img[src="${imageSrc}"]`);
+        if (sourceImg) {
+            modalImage.alt = sourceImg.alt;
+        }
+        
         modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        
+        // Фокус на кнопку закрытия
+        setTimeout(() => {
+            const closeBtn = modal.querySelector('.modal-close');
+            if (closeBtn) closeBtn.focus();
+        }, 100);
     }
 }
 
@@ -130,9 +145,11 @@ function closeModal(event) {
     
     if (!modal) return;
     
-    // Закрываем только при клике на overlay или кнопку закрытия
-    if (event.target === modal || event.target.classList.contains('modal-close')) {
+    if (event.target === modal || 
+        event.target.classList.contains('modal-close') ||
+        event.key === 'Escape') {
         modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }
 }
@@ -145,6 +162,13 @@ document.addEventListener('keydown', function(event) {
             modal.classList.remove('active');
             document.body.style.overflow = '';
         }
+    }
+});
+
+// Закрытие по Enter на кнопке
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && event.target.classList.contains('modal-close')) {
+        closeModal(event);
     }
 });
 

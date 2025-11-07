@@ -26,6 +26,196 @@
     color: var(--text-muted);
 }
 
+/* Portfolio Section */
+.portfolio {
+    padding: 100px 0;
+    background: var(--pearl-white);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.portfolio-card {
+    background: white;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow-subtle);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-elevated);
+}
+
+.portfolio-image {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover .portfolio-image img {
+    transform: scale(1.1);
+}
+
+.portfolio-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--gold);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.portfolio-badge.defect {
+    background: #f44336;
+}
+
+.portfolio-badge.antique {
+    background: #8b4513;
+}
+
+.portfolio-badge.synthetic {
+    background: #9c27b0;
+}
+
+.portfolio-badge.court {
+    background: #2196f3;
+}
+
+.portfolio-badge.insurance {
+    background: #4caf50;
+}
+
+.portfolio-content {
+    padding: 2rem;
+}
+
+.portfolio-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-black);
+}
+
+.portfolio-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.portfolio-category {
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.portfolio-content p {
+    line-height: 1.8;
+    color: var(--soft-black);
+    margin-bottom: 1.5rem;
+}
+
+.portfolio-result {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 3px solid #4caf50;
+}
+
+.portfolio-result svg {
+    color: #4caf50;
+    flex-shrink: 0;
+}
+
+.portfolio-result span {
+    font-weight: 500;
+    color: var(--primary-black);
+}
+
+/* Статистика успеха */
+.portfolio-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    padding: 3rem;
+    background: var(--primary-black);
+    color: var(--pearl-white);
+}
+
+.portfolio-stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* CTA */
+.portfolio-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+    border: 1px solid var(--gold);
+}
+
+.portfolio-cta h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-black);
+}
+
+.portfolio-cta p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .portfolio-stats {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+
 /* ========================================
    SERVICES SECTION
    ======================================== */
